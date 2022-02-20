@@ -5,7 +5,7 @@ var y = Math.floor(Math.random() * (boardwidth - 1))+1;
 var fx = Math.floor(Math.random() * (boardheight - 1))+1;
 var fy = Math.floor(Math.random() * (boardwidth - 1))+1;
 var score = 0;
-var time = 5;
+var time = 500;
 var total_time = 0;
 
 function gamegenerater()
@@ -38,7 +38,7 @@ function gamegenerater()
 
   document.getElementById('cell'+x+'-'+y).classList.add('Player');
   food();
-  var timer = setInterval(Counter, 1000);
+  var timer = setInterval(Counter, 10);
 }
 
 document.onkeydown = arrowkeys;
@@ -114,19 +114,19 @@ function eat() {
         fy = Math.floor(Math.random() * (boardwidth - 1))+1;
         document.getElementById('cell'+fx+'-'+fy).classList.add('food');
         score = score + 1;
-        document.getElementById("score").innerHTML = `Score: ${score}`;
-        time = time + 1;
-        document.getElementById("time").innerHTML = `Time: ${time}`;
+        document.getElementById("score").innerHTML = `Score: ${score} points`;
+        time = time + 100;
+        document.getElementById("time").innerHTML = `Time: ${time} miliseconds`;
     }
 }
 
 function Counter() {
-    document.getElementById("time").innerHTML = `Time: ${--time}`;
+    document.getElementById("time").innerHTML = `Time: ${--time} miliseconds`;
     ++total_time;
     if(time == 0){gameover()}
   }
 
 function gameover() {
-    alert(`Time's up! Your score was ${score} and your points per second was ${score / total_time}.`);
+    alert(`Time's up! Your score was ${score} and your points per second was ${score/(total_time/100)}.`);
     location.reload();
 }
